@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-md-10 mr-auto ml-auto">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">Chatty AI Chatbot</div>
+      </nav>
+      <form>
+        <div id="chatbox" class="cb">
+          <div class="col-md-8 ml-auto mr-auto">
+            <p class="botText"><span>Bot : Hi! I'm Chatty, your personal bot. <i style="font-size:13px;">(Press Quit to
+                  start new chat!)</i></span></p>
+          </div>
+        </div>
+        <div id="userInput" class="row">
+          <div class="col-md-10">
+            <input id="text" type="text" name="msg" placeholder="Start typing..." class="form-control">
+            <button type="submit" id="send" class="btn btn-success">Send</button>
+            <button type="button" id="quit" class="btn btn-danger" onClick="refreshPage()">Quit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("form").on("submit", function (event) {
+        // extract the text from input
+        var rawText = $("#text").val();
+        // displays user text
+        var userHtml = '<p class="userText"><span>' + "You : " + rawText + "</span></p>";
+        // clears the input field
+        $("#text").val("");
+        // appends to chatbot id. ["Hi! I'm Your bot.","Hi","How are you"]
+        $("#chatbox").append(userHtml);
+        document.getElementById("userInput").scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        });
+        $.ajax({
+          // connects with app.py
+          data: {
+            msg: rawText,
+          },
+          type: "POST",
+          url: "/get",
+        }).done(function (data) {
+          // sets bot text to a var
+          var botHtml = '<p class="botText"><span>' + "Bot : " + data + "</span></p>";
+          // appends bot response to chatbot id
+          $("#chatbox").append($.parseHTML(botHtml));
+          document.getElementById("userInput").scrollIntoView({
+            block: "start",
+            behavior: "smooth",
+          });
+        });
+        event.preventDefault();
+      });
+    });
+    function updateScroll() {
+      var element = document.getElementById("chatbox");
+      element.scrollTop = element.scrollHeight;
+    }
+    setInterval(updateScroll, 500);
+    function refreshPage() {
+      window.location.reload();
+    }
+
+  </script>
+</body>
+
+</html>
