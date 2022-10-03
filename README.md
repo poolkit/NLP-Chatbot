@@ -51,5 +51,6 @@ Bot: bye
 You: quit
 ```
 #### The final output as a website -
-
-<img src="image/website.png" width="50%" height="50%"><br />
+<p align="center">
+<img src="image/website.png" width="100%" height="100%"><br />
+</p>
