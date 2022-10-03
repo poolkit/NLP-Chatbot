@@ -25,7 +25,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-#### The final output is like this -
+#### The final output of the model -
 ```
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 .................# Welcome to Chatbot #................
@@ -50,3 +50,6 @@ Bot: bye
 =======================================================
 You: quit
 ```
+#### The final output as a website -
+
+<img src="image/website.png" width="50%" height="50%"><br />
