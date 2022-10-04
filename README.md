@@ -2,7 +2,7 @@
 A responsive chatbot trained on Sequence-to-Sequence modelling, deployed on Heroku.
 
 Are you guys fascinated by chatbots? Wonder how these machines understand what you exactly mean and respond to you in human language?
-This bot is built using Seq-2-Seq model, which I've explained in details in this medium post.
+This bot is built using Seq-2-Seq model, which I've explained in details in this [medium post](https://medium.com/@pulkit.pk7/sequence-2-sequence-chatbot-in-keras-from-scratch-8e32df8df671). The website can be found [here](https://chatty-ai-chatbot.herokuapp.com/).
 
 ### What is Sequence-to-Sequence Modelling?
 It is a special class of RNNs that take a sequence as an input and return a new sequence as the output. These sequences can be of different lengths and these models are well known to capture the essence of sequences with variable lengths. eg :<br />
